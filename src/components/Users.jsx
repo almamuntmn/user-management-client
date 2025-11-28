@@ -17,6 +17,21 @@ const handleSubmit = event => {
     const user = { name, email };
     console.log(user);
     form.reset();
+
+    // create user in the server
+    fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+        .then(res => res.json())
+        .then(data => {
+            const newUsers = [...users, data];
+            console.log(newUsers);
+            setUsers(newUsers);
+        });
 }
 
 
